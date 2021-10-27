@@ -1,0 +1,33 @@
+version: '3.1'
+
+services: 
+  keycloak:
+    image: jboss/keycloak-demo:1.0
+    container_name: keycloak
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password
+      DB_VENDOR: mysql
+      DB_USER: keycloak
+      DB_PASSWORD: password
+    ports:
+    - 38080:8080
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+    - 3306:3306
+  root-app:
+    build: ./root-app
+    ports:
+      - 3000:3000
+      
