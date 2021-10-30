@@ -1,0 +1,8 @@
+{
+  "realm": "frontend",
+  "auth-server-url": "http://localhost:38080/auth/",
+  "ssl-required": "external",
+  "resource": "third-app",
+  "public-client": true,
+  "confidential-port": 0
+}
