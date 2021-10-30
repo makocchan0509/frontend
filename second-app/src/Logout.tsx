@@ -24,7 +24,7 @@ const Logout: React.FC<LogoutProps> = (props) => {
 
     return (
         <div className="Logout">
-            <Button variant="outline-light" onClick={ () => logout() }>Logout</Button>
+            <Button variant="outline-info" onClick={ () => logout() }>Logout</Button>
         </div>
     );
 };

@@ -6,6 +6,8 @@ import KeycloakState from "./KeycloakState";
 import Keycloak from 'keycloak-js';
 import UserInfo from "./UserInfo";
 import Logout from "./Logout";
+import RouteService from "./RouteService";
+import Button from 'react-bootstrap/Button';
 
 const Secured: React.FC = () => {
 
@@ -27,6 +29,8 @@ const Secured: React.FC = () => {
                         <Alert.Heading>Authenticated</Alert.Heading>
                     </Alert>
                     <UserInfo keycloakState={keycloakState}/>
+                    <Button variant="outline-info" onClick={() => RouteService("second")}>Second Service</Button>
+                    <Button variant="outline-info" onClick={() => RouteService("third")}>Third Service</Button>
                     <Logout keycloakState={keycloakState}/>
                 </div>
             );
