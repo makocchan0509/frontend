@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: masemfordev-app
+  namespace: frontend
   annotations:
     kubernetes.io/ingress.class: "contour"             # <- contour以外のIngress Controllerに作って欲しくない場合
     kubernetes.io/tls-acme: "true"                     # <- 必須か不明なので一応付けました
@@ -21,6 +22,7 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
               serviceName: root-app-svc
               servicePort: 3000
@@ -28,6 +30,7 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
               serviceName: second-app-svc
               servicePort: 3000
@@ -35,6 +38,7 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
               serviceName: third-app-svc
               servicePort: 3000
@@ -42,6 +46,7 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
               serviceName: keycloak-svc
               servicePort: 8080

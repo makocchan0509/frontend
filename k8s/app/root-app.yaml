@@ -8,7 +8,7 @@ metadata:
   namespace: frontend
 spec:
   containers:
-  - image: gcr.io/masem-sandbox/root-app:1.0
+  - image: gcr.io/masem-sandbox/root-app:2.0
     name: root-app
     ports:
     - containerPort: 3000
