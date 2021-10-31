@@ -10,11 +10,11 @@ services:
       DB_VENDOR: mysql
       DB_USER: keycloak
       DB_PASSWORD: password
-      KEYCLOAK_IMPORT: /tmp/import-demo.json
+      KEYCLOAK_IMPORT: /tmp/import-frontend.json
     ports:
       - 38080:8080
     volumes:
-      - ./keycloak/import-demo.json:/tmp/import-demo.json
+      - ./keycloak/import-frontend.json:/tmp/import-frontend.json
     depends_on:
       - mysql
   mysql:
@@ -32,5 +32,12 @@ services:
   root-app:
     build: ./root-app
     ports:
-      - 3000:3000
-      
+      - 3100:3100
+  second-app:
+    build: ./second-app
+    ports:
+      - 4100:4100
+  third-app:
+    build: ./third-app
+    ports:
+      - 5101:5101

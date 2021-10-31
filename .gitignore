@@ -1,3 +1,5 @@
 .DS_Store
 .idea
 keycloak-containers
+.terraform
+.terraform.lock.hcl

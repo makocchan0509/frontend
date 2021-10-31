@@ -1,0 +1,23 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-issuer
+spec:
+  acme:
+    # まずはstagingで試して、問題なく証明書ができたらprodで再実行
+    server: https://acme-v02.api.letsencrypt.org/directory
+    #server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: makoto.mase@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-issuer
+    solvers:
+      - selector:
+          dnsZones:
+            - "masemfordev.com"
+        dns01:
+          route53:
+            region: ap-northeast-1
+            accessKeyID: AKIAWL4SWAZHK4BCRM4I
+            secretAccessKeySecretRef:
+              name: route53-credentials-secret
+              key: secret-access-key

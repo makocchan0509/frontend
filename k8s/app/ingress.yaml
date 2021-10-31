@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: masemfordev-app
+  annotations:
+    kubernetes.io/ingress.class: "contour"             # <- contour以外のIngress Controllerに作って欲しくない場合
+    kubernetes.io/tls-acme: "true"                     # <- 必須か不明なので一応付けました
+    kubernetes.io/ingress.allow-http: "false"          # <- httpsのみにしたい場合
+    cert-manager.io/cluster-issuer: letsencrypt-issuer # <- 必須か不明なので一応付けました
+spec:
+  tls:
+    - hosts:
+        - root-web.masemfordev.com
+        - second-web.masemfordev.com
+        - third-web.masemfordev.com
+        - auth.masemfordev.com
+        - masemfordev.com
+      secretName: masemfordev-com-tls
+  rules:
+    - host: root-web.masemfordev.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: root-app-svc
+              servicePort: 3000
+    - host: second-web.masemfordev.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: second-app-svc
+              servicePort: 3000
+    - host: third-web.masemfordev.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: third-app-svc
+              servicePort: 3000
+    - host: auth.masemfordev.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: keycloak-svc
+              servicePort: 8080
