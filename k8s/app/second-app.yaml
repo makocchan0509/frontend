@@ -8,7 +8,7 @@ metadata:
   namespace: frontend
 spec:
   containers:
-  - image: gcr.io/masem-sandbox/second-app:2.0
+  - image: gcr.io/masem-sandbox/second-app:2.1
     name: second-app
     ports:
     - containerPort: 3000

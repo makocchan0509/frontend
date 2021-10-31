@@ -1,6 +1,6 @@
 {
   "realm": "frontend",
-  "auth-server-url": "https://auth.masemfordev.com/auth/",
+  "auth-server-url": "https://auth.masemfordev.com:30443/auth/",
   "ssl-required": "external",
   "resource": "root-app",
   "public-client": true,
