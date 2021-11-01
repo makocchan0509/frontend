@@ -13,5 +13,6 @@ spec:
     targetPort: 8080
   selector:
     run: keycloak
+  type: NodePort
 status:
   loadBalancer: {}

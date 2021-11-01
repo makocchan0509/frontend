@@ -1,10 +1,11 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: masemfordev-app
   namespace: frontend
   annotations:
-    kubernetes.io/ingress.class: "contour"             # <- contour以外のIngress Controllerに作って欲しくない場合
+    kubernetes.io/ingress.class: "gce"
+#    kubernetes.io/ingress.class: "contour"             # <- contour以外のIngress Controllerに作って欲しくない場合
     kubernetes.io/tls-acme: "true"                     # <- 必須か不明なので一応付けました
     kubernetes.io/ingress.allow-http: "false"          # <- httpsのみにしたい場合
     cert-manager.io/cluster-issuer: letsencrypt-issuer # <- 必須か不明なので一応付けました
@@ -21,32 +22,40 @@ spec:
     - host: root-web.masemfordev.com
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /*
+            pathType: ImplementationSpecific
             backend:
-              serviceName: root-app-svc
-              servicePort: 3000
+              service:
+                name: root-app-svc
+                port:
+                  number: 3000
     - host: second-web.masemfordev.com
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /*
+            pathType: ImplementationSpecific
             backend:
-              serviceName: second-app-svc
-              servicePort: 3000
+              service:
+                name: second-app-svc
+                port:
+                  number: 3000
     - host: third-web.masemfordev.com
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /*
+            pathType: ImplementationSpecific
             backend:
-              serviceName: third-app-svc
-              servicePort: 3000
+              service:
+                name: third-app-svc
+                port:
+                  number: 3000
     - host: auth.masemfordev.com
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /*
+            pathType: ImplementationSpecific
             backend:
-              serviceName: keycloak-svc
-              servicePort: 8080
+              service:
+                name: keycloak-svc
+                port:
+                  number: 8080

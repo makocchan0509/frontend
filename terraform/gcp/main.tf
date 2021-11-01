@@ -19,6 +19,14 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
       "https://www.googleapis.com/auth/service.management.readonly",
       "https://www.googleapis.com/auth/trace.append"
     ]
-
   }
+}
+
+resource "google_compute_address" "static_region_ip" {
+  name         = "static-region-ip"
+  network_tier = "STANDARD"
+}
+
+output "static_region_ip" {
+  value = google_compute_address.static_region_ip.address
 }
